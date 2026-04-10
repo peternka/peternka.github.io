@@ -4,21 +4,73 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Peter Nencka</title>
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://peternka.github.io/">
+<meta property="og:title"       content="Peter Nencka — Economist, Miami University">
+<meta property="og:description" content="Rose-Marie Garcia Anderson Assistant Professor of Economics at Miami University and NBER Faculty Research Fellow. Research in labor, public economics, economic history, education, and innovation.">
+<meta property="og:image"       content="https://peternka.github.io/assets/profile.jpg">
+<meta name="twitter:card"       content="summary">
+<meta name="twitter:title"      content="Peter Nencka — Economist, Miami University">
+<meta name="twitter:description" content="Rose-Marie Garcia Anderson Assistant Professor of Economics at Miami University and NBER Faculty Research Fellow.">
+<meta name="twitter:image"      content="https://peternka.github.io/assets/profile.jpg">
+
+<!-- SVG favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23046A38'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' fill='white' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
 <style>
+  /* ── Light mode tokens ── */
   :root {
-    --text: #1a1a1a;
-    --muted: #6b6b6b;
-    --green: #046A38;       /* Masters green */
-    --green-dark: #024F29;
-    --green-soft: #f2f7f4;  /* barely-there tint */
-    --bg: #fdfdfc;
-    --rule: #e8e8e4;
+    --text:        #1a1a1a;
+    --muted:       #6b6b6b;
+    --green:       #046A38;
+    --green-dark:  #024F29;
+    --green-soft:  #f2f7f4;
+    --bg:          #fdfdfc;
+    --rule:        #e8e8e4;
+    --pub-accent:  #d4e9dc;   /* left-border tint on pub entries */
   }
+
+  /* ── Dark mode tokens ── */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text:       #e8e6e0;
+      --muted:      #9a9890;
+      --green:      #4db87a;
+      --green-dark: #6ecf93;
+      --green-soft: #0d1f15;
+      --bg:         #141412;
+      --rule:       #2e2e2a;
+      --pub-accent: #1a3326;
+    }
+  }
+
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+
+  /* ── Skip link ── */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    background: var(--green);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 6px 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: none;
+    z-index: 100;
+    transition: top 0.15s ease;
+  }
+  .skip-link:focus { top: 0; }
+
   body {
     font-family: "Atkinson Hyperlegible Next", -apple-system, system-ui, sans-serif;
     max-width: 780px;
@@ -30,7 +82,8 @@
     font-size: 17px;
     -webkit-font-smoothing: antialiased;
   }
-  /* thin green bar at very top of page */
+
+  /* thin green bar at very top */
   body::before {
     content: "";
     position: fixed;
@@ -39,8 +92,9 @@
     background: var(--green);
     z-index: 10;
   }
+
+  /* ── Nav ── */
   nav {
-    font-family: "Atkinson Hyperlegible Next", -apple-system, system-ui, sans-serif;
     font-size: 0.82rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -52,9 +106,13 @@
     margin-right: 1.5rem;
     color: var(--muted);
     text-decoration: none;
+    border-bottom: none;
     transition: color 0.15s ease;
   }
-  nav a:hover { color: var(--green); }
+  nav a:hover,
+  nav a.active { color: var(--green); }
+
+  /* ── Header ── */
   header {
     display: flex;
     align-items: center;
@@ -71,8 +129,9 @@
     padding: 3px;
     background: var(--bg);
   }
+
+  /* ── Type scale ── */
   h1 {
-    font-family: "Atkinson Hyperlegible Next", -apple-system, system-ui, sans-serif;
     font-size: 2.1rem;
     margin: 0 0 0.35rem;
     font-weight: 600;
@@ -82,10 +141,8 @@
     color: var(--muted);
     margin: 0;
     font-size: 0.95rem;
-    font-family: "Atkinson Hyperlegible Next", -apple-system, system-ui, sans-serif;
   }
   h2 {
-    font-family: "Atkinson Hyperlegible Next", -apple-system, system-ui, sans-serif;
     font-size: 1.15rem;
     margin-top: 2.8rem;
     margin-bottom: 0.8rem;
@@ -103,15 +160,16 @@
     background: var(--green);
   }
   h3 {
-    font-family: "Atkinson Hyperlegible Next", -apple-system, system-ui, sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.82rem;        /* was 0.75rem — now reads more confidently */
     margin-top: 1.8rem;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.75rem;
     color: var(--green);
     text-transform: uppercase;
     letter-spacing: 0.09em;
     font-weight: 600;
   }
+
+  /* ── Links ── */
   a {
     color: var(--green);
     text-decoration: none;
@@ -119,34 +177,71 @@
     transition: border-color 0.15s ease;
   }
   a:hover { border-bottom-color: var(--green); }
+
   p { margin: 0 0 1rem; }
-  .pub { margin-bottom: 1.15rem; }
+
+  /* ── Publication entries ── */
+  .pub {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pub:last-of-type { border-bottom: none; }
+  h3 + .pub { padding-top: 0; }
+
   .pub .venue { color: var(--muted); font-style: italic; }
-  .pub .media { font-size: 0.88rem; color: var(--muted); margin-top: 0.15rem; }
+  .pub .media { font-size: 0.88rem; color: var(--muted); margin-top: 0.2rem; }
   .pub .media a { color: var(--muted); }
   .pub .media a:hover { color: var(--green); border-bottom-color: var(--green); }
+
+  /* ── Contact list ── */
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+  .contact-list .icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    color: var(--muted);
+  }
+
+  /* ── Misc ── */
   ul { padding-left: 1.1rem; }
   ul li { margin-bottom: 0.35rem; }
   .note { font-size: 0.82rem; color: var(--muted); margin-top: 1rem; }
+
   footer {
     margin-top: 4rem;
     font-size: 0.82rem;
     color: var(--muted);
     border-top: 1px solid var(--rule);
     padding-top: 1.2rem;
-    font-family: "Atkinson Hyperlegible Next", -apple-system, system-ui, sans-serif;
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="#about">Home</a>
+<!-- Fix 5: skip link -->
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav aria-label="Main navigation">
+  <a href="#about"    data-section="about">Home</a>
   <a href="cv.pdf">CV</a>
-  <a href="#research">Research</a>
-  <a href="#teaching">Teaching</a>
-  <a href="#contact">Contact</a>
+  <a href="#research" data-section="research">Research</a>
+  <a href="#teaching" data-section="teaching">Teaching</a>
+  <a href="#contact"  data-section="contact">Contact</a>
 </nav>
+
+<main id="main-content">
 
 <header id="about">
   <img src="assets/profile.jpg" alt="Peter Nencka">
@@ -168,8 +263,10 @@
   Before graduate school, I studied economics and philosophy at <a href="https://www.beloit.edu/">Beloit College</a>.
 </p>
 
+<!-- Fix 1: was a broken nested anchor; now two separate links -->
 <p>
-  You can find my CV <a href="cv.pdf">here and email me at <a href="mailto:nenckap@miamioh.edu">nenckap@miamioh.edu</a>.
+  You can find my CV <a href="cv.pdf">here</a>, and reach me by email at
+  <a href="mailto:nenckap@miamioh.edu">nenckap@miamioh.edu</a>.
 </p>
 
 <h2 id="research">Research</h2>
@@ -223,7 +320,7 @@
 <h3>Works in Progress</h3>
 
 <div class="pub">
-  <a href="assets/high_schools.pdf">The democratization of opportunity: The effects of the U.S. high school movement</a>
+  <a href="assets/high_schools.pdf">High schools and the uneven rise in American opportunity</a>
   (with <a href="https://ezrakarger.com/">Ezra Karger</a> and Alison Doxey Koetting).
 </div>
 
@@ -263,26 +360,89 @@
 <h2 id="teaching">Teaching</h2>
 
 <h3>Current Courses</h3>
+
 <div class="pub">
   <strong>Examining Economic Data and Models</strong> (undergraduate econometrics) — Miami University, Fall 2020–present
 </div>
 <div class="pub">
   <strong>Graduate Applied Microeconomics</strong> (advanced causal inference and machine learning) — Miami University, Spring 2023–present
 </div>
+
+<h3>Past Courses</h3>
+
 <div class="pub">
   <strong>Introduction to Microeconomics</strong> — Miami University, Fall 2024
 </div>
 
 <h2 id="contact">Contact</h2>
-<ul>
-  <li>Department of Economics, Miami University</li>
-  <li>Email: <a href="mailto:nenckap@miamioh.edu">nenckap@miamioh.edu</a></li>
-  <li><a href="cv.pdf">Curriculum vitae</a></li>
-  <li><a href="https://scholar.google.com/citations?user=xv7pJRAAAAAJ&hl=en">Google Scholar</a></li>
-  <li><a href="https://bsky.app/profile/peternka.bsky.social">Bluesky</a></li>
+
+<!-- Polish: icon-annotated contact list -->
+<ul class="contact-list">
+  <li>
+    <!-- building icon -->
+    <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="7" width="14" height="11" rx="1"/><path d="M1 7l9-5 9 5"/><path d="M8 18v-5h4v5"/>
+    </svg>
+    <span>Department of Economics, Miami University</span>
+  </li>
+  <li>
+    <!-- envelope icon -->
+    <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 7l8 5 8-5"/>
+    </svg>
+    <a href="mailto:nenckap@miamioh.edu">nenckap@miamioh.edu</a>
+  </li>
+  <li>
+    <!-- document icon -->
+    <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M5 2h7l4 4v12a1 1 0 01-1 1H5a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M12 2v4h4"/><path d="M7 10h6M7 13h4"/>
+    </svg>
+    <a href="cv.pdf">Curriculum vitae</a>
+  </li>
+  <li>
+    <!-- graduation cap / scholar icon -->
+    <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M10 3L2 7l8 4 8-4-8-4z"/><path d="M2 7v5"/><path d="M6 9.5V14c0 1.5 1.8 2.5 4 2.5s4-1 4-2.5V9.5"/>
+    </svg>
+    <a href="https://scholar.google.com/citations?user=xv7pJRAAAAAJ&hl=en">Google Scholar</a>
+  </li>
+  <li>
+    <!-- butterfly / Bluesky icon approximation -->
+    <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M10 6C10 6 6 2 2 4c0 4 3 6 8 6s8-2 8-6c-4-2-8 2-8 2z"/><path d="M10 12v5"/>
+    </svg>
+    <a href="https://bsky.app/profile/peternka.bsky.social">Bluesky</a>
+  </li>
 </ul>
 
+</main>
+
 <footer>© 2026 Peter Nencka</footer>
+
+<!-- Fix 6: active nav state via IntersectionObserver -->
+<script>
+(function () {
+  const navLinks = document.querySelectorAll('nav a[data-section]');
+  const sections = ['about', 'research', 'teaching', 'contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  function setActive(id) {
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.section === id);
+    });
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+  setActive('about'); // default on load
+})();
+</script>
 
 </body>
 </html>
