@@ -31,35 +31,47 @@
     --green:       #046A38;
     --green-dark:  #024F29;
     --green-soft:  #f2f7f4;
+    --warm:        #B4654A;
+    --warm-dark:   #8E4E38;
+    --warm-soft:   #faf3f0;
     --bg:          #fdfdfc;
     --rule:        #e8e8e4;
-    --pub-accent:  #d4e9dc;   /* left-border tint on pub entries */
+    --pub-accent:  #d4e9dc;
+    --pub-hover:   #f7f9f7;
   }
 
   /* ── Dark mode tokens (system preference) ── */
   @media (prefers-color-scheme: dark) {
     :root:not(.light) {
-      --text:       #c8c5bc;
-      --muted:      #87847c;
-      --green:      #3d9e62;
-      --green-dark: #4eb876;
+      --text:       #d4d1c8;
+      --muted:      #918e85;
+      --green:      #4aab6e;
+      --green-dark: #5cc484;
       --green-soft: #111a14;
+      --warm:       #D4845F;
+      --warm-dark:  #E09A7A;
+      --warm-soft:  #1e1614;
       --bg:         #1c1b18;
-      --rule:       #2b2a26;
+      --rule:       #2e2d28;
       --pub-accent: #1a2820;
+      --pub-hover:  #23221e;
     }
   }
 
   /* ── Dark mode (manual toggle) ── */
   :root.dark {
-    --text:       #c8c5bc;
-    --muted:      #87847c;
-    --green:      #3d9e62;
-    --green-dark: #4eb876;
+    --text:       #d4d1c8;
+    --muted:      #918e85;
+    --green:      #4aab6e;
+    --green-dark: #5cc484;
     --green-soft: #111a14;
+    --warm:       #D4845F;
+    --warm-dark:  #E09A7A;
+    --warm-soft:  #1e1614;
     --bg:         #1c1b18;
-    --rule:       #2b2a26;
+    --rule:       #2e2d28;
     --pub-accent: #1a2820;
+    --pub-hover:  #23221e;
   }
 
   /* ── Light mode (manual override) ── */
@@ -69,9 +81,13 @@
     --green:      #046A38;
     --green-dark: #024F29;
     --green-soft: #f2f7f4;
+    --warm:       #B4654A;
+    --warm-dark:  #8E4E38;
+    --warm-soft:  #faf3f0;
     --bg:         #fdfdfc;
     --rule:       #e8e8e4;
     --pub-accent: #d4e9dc;
+    --pub-hover:  #f7f9f7;
   }
 
   /* ── Theme toggle button ── */
@@ -123,13 +139,13 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* thin green bar at very top */
+  /* ── Top accent bar: two-tone green/warm ── */
   body::before {
     content: "";
     position: fixed;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: var(--green);
+    background: linear-gradient(90deg, var(--green) 70%, var(--warm) 100%);
     z-index: 10;
   }
 
@@ -150,9 +166,18 @@
     text-decoration: none;
     border-bottom: none;
     transition: color 0.15s ease;
+    position: relative;
   }
   nav a:hover,
   nav a.active { color: var(--green); }
+  nav a.active::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -1.05rem;
+    height: 2px;
+    background: var(--green);
+  }
 
   /* ── Header ── */
   header {
@@ -163,12 +188,12 @@
     flex-wrap: wrap;
   }
   header img {
-    width: 135px;
-    height: 135px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--green);
-    padding: 3px;
+    border: 3px solid var(--green);
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--warm);
     background: var(--bg);
   }
 
@@ -177,7 +202,7 @@
     font-size: 2.1rem;
     margin: 0 0 0.35rem;
     font-weight: 600;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
   }
   .title {
     color: var(--muted);
@@ -185,25 +210,26 @@
     font-size: 0.95rem;
   }
   h2 {
-    font-size: 1.15rem;
-    margin-top: 2.8rem;
+    font-size: 1.35rem;
+    margin-top: 3.2rem;
     margin-bottom: 0.8rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     position: relative;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.5rem;
+    scroll-margin-top: 1.5rem;
   }
   h2::after {
     content: "";
     position: absolute;
     left: 0; bottom: 0;
-    width: 32px;
+    width: 40px;
     height: 2px;
-    background: var(--green);
+    background: var(--warm);
   }
   h3 {
-    font-size: 0.82rem;        /* was 0.75rem — now reads more confidently */
-    margin-top: 1.8rem;
+    font-size: 0.82rem;
+    margin-top: 2rem;
     margin-bottom: 0.75rem;
     color: var(--green);
     text-transform: uppercase;
@@ -216,7 +242,7 @@
     color: var(--green);
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.15s ease;
+    transition: border-color 0.15s ease, color 0.15s ease;
   }
   a:hover { border-bottom-color: var(--green); }
 
@@ -224,36 +250,68 @@
 
   /* ── Publication entries ── */
   .pub {
-    padding: 0.85rem 0;
-    border-bottom: 1px solid var(--rule);
+    padding: 0.85rem 0.85rem;
+    margin-left: -0.85rem;
+    margin-right: -0.85rem;
+    border-left: 3px solid transparent;
+    border-radius: 2px;
+    transition: background 0.15s ease, border-color 0.15s ease;
   }
-  .pub:last-of-type { border-bottom: none; }
-  h3 + .pub { padding-top: 0; }
+  .pub + .pub {
+    border-top: 1px solid var(--rule);
+  }
+  h3 + .pub { padding-top: 0.85rem; }
+
+  .pub:hover {
+    background: var(--pub-hover);
+    border-left-color: var(--pub-accent);
+  }
+
+  /* publication title links: slightly heavier */
+  .pub > a:first-child {
+    font-weight: 500;
+  }
 
   .pub .venue { color: var(--muted); font-style: italic; }
-  .pub .media { font-size: 0.88rem; color: var(--muted); margin-top: 0.2rem; }
-  .pub .media a { color: var(--muted); }
-  .pub .media a:hover { color: var(--green); border-bottom-color: var(--green); }
+  .pub .media {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+  .pub .media a {
+    color: var(--warm);
+    border-bottom-color: transparent;
+  }
+  .pub .media a:hover {
+    color: var(--warm-dark);
+    border-bottom-color: var(--warm);
+  }
 
   /* ── Contact list ── */
   .contact-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+  }
+  @media (max-width: 520px) {
+    .contact-list { grid-template-columns: 1fr; }
   }
   .contact-list li {
     display: flex;
     align-items: flex-start;
     gap: 0.65rem;
-    margin-bottom: 0.6rem;
     color: var(--text);
+    padding: 0.4rem 0;
   }
   .contact-list .icon {
     flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    margin-top: 3px;
-    color: var(--muted);
+    width: 17px;
+    height: 17px;
+    margin-top: 4px;
+    color: var(--warm);
   }
 
   /* ── Misc ── */
@@ -268,11 +326,15 @@
     border-top: 1px solid var(--rule);
     padding-top: 1.2rem;
   }
+
+  /* ── Section dividers: subtle breathing room ── */
+  h2#teaching { margin-top: 3.8rem; }
+  h2#contact  { margin-top: 3.8rem; }
 </style>
 </head>
 <body>
 
-<!-- Fix 5: skip link -->
+<!-- Skip link -->
 <a href="#main-content" class="skip-link">Skip to content</a>
 
 <nav aria-label="Main navigation">
@@ -296,7 +358,7 @@
 <main id="main-content">
 
 <header id="about">
-  <img src="assets/profile.jpg" alt="Peter Nencka">
+  <img src="assets/profile.jpg" alt="Peter Nencka" width="130" height="130" loading="eager">
   <div>
     <h1>Peter Nencka</h1>
     <p class="title">Rose-Marie Garcia Anderson Assistant Professor of Economics<br>Miami University</p>
@@ -315,7 +377,6 @@
   Before graduate school, I studied economics and philosophy at <a href="https://www.beloit.edu/">Beloit College</a>.
 </p>
 
-<!-- Fix 1: was a broken nested anchor; now two separate links -->
 <p>
   You can find my CV <a href="cv.pdf">here</a>, and reach me by email at
   <a href="mailto:nenckap@miamioh.edu">nenckap@miamioh.edu</a>.
@@ -428,7 +489,6 @@
 
 <h2 id="contact">Contact</h2>
 
-<!-- Polish: icon-annotated contact list -->
 <ul class="contact-list">
   <li>
     <!-- building icon -->
@@ -471,18 +531,16 @@
 
 <footer>© 2026 Peter Nencka</footer>
 
-<!-- Active nav + dark mode toggle -->
 <script>
 (function () {
-  const root = document.documentElement;
-  const btn  = document.getElementById('theme-toggle');
-  const sun  = document.getElementById('icon-sun');
-  const moon = document.getElementById('icon-moon');
+  var root = document.documentElement;
+  var btn  = document.getElementById('theme-toggle');
+  var sun  = document.getElementById('icon-sun');
+  var moon = document.getElementById('icon-moon');
 
-  // Determine initial mode: localStorage wins, then system preference
-  const stored = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  let isDark = stored === 'dark' || (!stored && prefersDark);
+  var stored = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var isDark = stored === 'dark' || (!stored && prefersDark);
 
   function applyTheme(dark) {
     root.classList.toggle('dark', dark);
@@ -499,23 +557,33 @@
     applyTheme(isDark);
   });
 
-  // Active nav section via IntersectionObserver
-  const navLinks = document.querySelectorAll('nav a[data-section]');
-  const sections = ['about', 'research', 'teaching', 'contact']
-    .map(id => document.getElementById(id)).filter(Boolean);
+  /* Active nav via IntersectionObserver */
+  var navLinks = document.querySelectorAll('nav a[data-section]');
+  var sectionIds = ['about', 'research', 'teaching', 'contact'];
+  var sections = sectionIds.map(function(id) { return document.getElementById(id); }).filter(Boolean);
 
   function setActive(id) {
-    navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === id));
+    navLinks.forEach(function(a) {
+      if (a.getAttribute('data-section') === id) {
+        a.classList.add('active');
+      } else {
+        a.classList.remove('active');
+      }
+    });
   }
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
-  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    }, { rootMargin: '-20% 0px -60% 0px' });
 
-  sections.forEach(s => observer.observe(s));
-  setActive('about');
+    sections.forEach(function(s) { observer.observe(s); });
+  }
 })();
 </script>
-
 </body>
 </html>
