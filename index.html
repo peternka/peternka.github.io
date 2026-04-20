@@ -21,7 +21,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
 <!-- Theme boot (prevents FOUC) -->
 <script>
@@ -225,12 +225,12 @@
 
   /* ── Type scale ── */
   h1 {
-    font-family: "Instrument Serif", Georgia, serif;
+    font-family: "Lora", Georgia, serif;
     font-size: clamp(2.4rem, 5.5vw, 3.3rem);
     margin: 0 0 0.35rem;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: -0.015em;
-    line-height: 1.02;
+    line-height: 1.1;
   }
   .title {
     color: var(--muted);
@@ -238,13 +238,13 @@
     font-size: 0.95rem;
   }
   h2 {
-    font-family: "Instrument Serif", Georgia, serif;
+    font-family: "Lora", Georgia, serif;
     font-size: clamp(1.7rem, 3vw, 2rem);
     margin-top: 3.2rem;
     margin-bottom: 0.8rem;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: -0.01em;
-    line-height: 1.15;
+    line-height: 1.2;
     position: relative;
     padding-bottom: 0.5rem;
     scroll-margin-top: 1.5rem;
@@ -315,6 +315,15 @@
   .pub .media a:hover {
     color: var(--warm-dark);
     border-bottom-color: var(--warm);
+  }
+
+  /* ── "Under review" status marker ── */
+  .status {
+    color: var(--warm-dark);
+    font-style: italic;
+    font-size: 0.88rem;
+    margin-left: 0.4rem;
+    white-space: nowrap;
   }
 
   /* ── Contact list ── */
@@ -475,16 +484,21 @@
 <h3>Works in Progress</h3>
 
 <div class="pub">
-  <a href="assets/high_schools.pdf" class="pub-title">High schools and the uneven rise in American opportunity</a>
+  <a href="assets/high_schools.pdf" class="pub-title">High schools and the uneven rise in American opportunity</a> <span class="status">(under review)</span>
   (with <a href="https://ezrakarger.com/">Ezra Karger</a> and Alison Doxey Koetting).
 </div>
 
 <div class="pub">
-  <a href="assets/pandemic_hospitals.pdf" class="pub-title">Do pandemics change healthcare? Evidence from the Great Influenza</a>
+  <a href="assets/pandemic_hospitals.pdf" class="pub-title">Do pandemics change healthcare? Evidence from the Great Influenza</a> <span class="status">(under review)</span>
   (with <a href="https://sites.google.com/view/resteves">Rui Esteves</a>,
   <a href="https://sites.google.com/site/krismitchener/home">Kris James Mitchener</a>, and
   <a href="https://miamioh.edu/fsb/directory/?up=%2Fdirectory%2Fthomasma">Melissa A. Thomasson</a>;
   also <a href="https://www.nber.org/papers/w30643">NBER WP w30643</a>).
+</div>
+
+<div class="pub">
+  <a href="assets/soccer_record.pdf" class="pub-title">Soccer's record on the road: The effect of late-night sporting events on fatal car crashes</a> <span class="status">(under review)</span>
+  (with <a href="https://sites.google.com/colorado.edu/james-flynn">James Flynn</a> and Noah Meyers-Richter*).
 </div>
 
 <div class="pub">
@@ -495,11 +509,6 @@
 <div class="pub">
   The Women's Ku Klux Klan and education in the 1920s
   (with <a href="https://daniellecgw.github.io/research">Danielle Graves Williamson</a>).
-</div>
-
-<div class="pub">
-  <a href="assets/soccer_record.pdf" class="pub-title">Soccer's record on the road: The effect of late-night sporting events on fatal car crashes</a>
-  (with <a href="https://sites.google.com/colorado.edu/james-flynn">James Flynn</a> and Noah Meyers-Richter*).
 </div>
 
 <h3>Book Chapters</h3>
