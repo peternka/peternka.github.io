@@ -381,6 +381,7 @@
   <a href="cv.pdf">CV</a>
   <a href="#research" data-section="research">Research</a>
   <a href="#teaching" data-section="teaching">Teaching</a>
+  <a href="#other"    data-section="other">Other</a>
   <a href="#contact"  data-section="contact">Contact</a>
   <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
     <!-- sun icon (shown in dark mode) -->
@@ -538,6 +539,15 @@
   <strong>Introduction to Microeconomics</strong> — Miami University, Fall 2024
 </div>
 
+<h2 id="other">Other</h2>
+
+<p>
+  I'm trying to read more books. In 2026, I signed up as a
+  <a href="https://reactormag.com/anyone-can-vote-in-the-hugo-awards-and-heres-how/">Hugo Award voter</a>
+  and started keeping a list of the history books I read. You can find both my evolving Hugo ballot and history reading
+  <a href="https://docs.google.com/spreadsheets/d/1roJ9-qCq1F5MzMuF2Fux5Vo4ZJw5U5BiROTpaOUI9C0/edit?usp=sharing">here</a>.
+</p>
+
 <h2 id="contact">Contact</h2>
 
 <ul class="contact-list">
@@ -619,7 +629,7 @@
 
   /* Active nav via IntersectionObserver */
   var navLinks = document.querySelectorAll('nav a[data-section]');
-  var sectionIds = ['about', 'research', 'teaching', 'contact'];
+  var sectionIds = ['about', 'research', 'teaching', 'other', 'contact'];
   var sections = sectionIds.map(function(id) { return document.getElementById(id); }).filter(Boolean);
 
   function setActive(id) {
