@@ -232,6 +232,7 @@
 
   /* iOS Add-to-Home-Screen banner */
   .a2hs {
+    display: none;            /* hidden everywhere by default; JS adds .show only on iOS */
     position: fixed;
     left: 12px; right: 12px; bottom: 12px;
     z-index: 50;
@@ -242,9 +243,11 @@
     border-radius: 18px;
     box-shadow: var(--shadow-lg);
     padding: 12px 40px 12px 12px;
-    display: flex;
     align-items: center;
     gap: 12px;
+  }
+  .a2hs.show {
+    display: flex;
     animation: a2hsRise 0.4s cubic-bezier(.4,1.6,.5,1);
   }
   @keyframes a2hsRise { from { transform: translateY(120%); } to { transform: none; } }
@@ -723,7 +726,7 @@
 </div>
 
 <!-- iOS "Add to Home Screen" hint -->
-<div class="a2hs" id="a2hs" hidden>
+<div class="a2hs" id="a2hs">
   <button class="a2hs-close" id="a2hs-close" aria-label="Dismiss">×</button>
   <img src="icon-180.png" alt="" class="a2hs-icon">
   <div class="a2hs-text">
@@ -4358,9 +4361,9 @@ renderHome();
   if (isIos() && !isStandalone() && !dismissed) {
     var banner = document.getElementById('a2hs');
     // show after a short beat so it doesn't fight the first paint
-    setTimeout(function () { banner.hidden = false; }, 1200);
+    setTimeout(function () { banner.classList.add('show'); }, 1200);
     document.getElementById('a2hs-close').onclick = function () {
-      banner.hidden = true;
+      banner.classList.remove('show');
       try { localStorage.setItem(DISMISS_KEY, '1'); } catch (e) {}
     };
   }
